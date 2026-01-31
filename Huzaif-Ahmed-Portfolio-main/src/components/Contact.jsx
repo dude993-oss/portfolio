@@ -33,6 +33,18 @@ const Contact = () => {
 
 
 
+    // Debugging: Check if env vars are loaded
+    console.log("Service ID:", import.meta.env.VITE_APP_EMAILJS_SERVICE_ID);
+    console.log("Template ID:", import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID);
+    console.log("Public Key:", import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY);
+
+    if (!import.meta.env.VITE_APP_EMAILJS_SERVICE_ID || !import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID || !import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY) {
+      console.error("Missing EmailJS environment variables!");
+      alert("Missing configuration. Check console for details.");
+      setLoading(false);
+      return;
+    }
+
     emailjs
       .send(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
